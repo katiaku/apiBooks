@@ -50,7 +50,8 @@ const editUser = async (req, res) => {
     try {
         let params = [req.body.name, req.body.last_name, req.body.photo, req.body.email];
         let sql = `UPDATE user 
-                    SET name = ?, last_name = ?, photo = ?   
+                    SET name = COALESCE(?, name), last_name = COALESCE(?, last_name), 
+                    photo = COALESCE(?, photo)   
                     WHERE email = ?`;
         let [result] = await pool.query(sql, params);
         res.send(result);
