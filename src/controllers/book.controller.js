@@ -48,9 +48,12 @@ const addBook = async (req, res) => {
 
 const editBook = async (req, res) => {
     try {
-        let params = [req.body.id_user, req.body.title, req.body.type, req.body.autor, req.body.price, req.body.photo, req.body.id_book];
+        let params = [req.body.id_user, req.body.title, req.body.type, req.body.autor, 
+            req.body.price, req.body.photo, req.body.id_book];
         let sql = `UPDATE book 
-                    SET id_user = ?, title = ?, type = ?, autor = ?, price = ?, photo = ?  
+                    SET id_user = COALESCE(?, id_user), title = COALESCE(?, title), 
+                    type = COALESCE(?, type), autor = COALESCE(?, autor), 
+                    price = COALESCE(?, price), photo = COALESCE(?, photo)   
                     WHERE id_book = ?`;
         let [result] = await pool.query(sql, params);
         res.send(result);
