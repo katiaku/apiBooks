@@ -29,8 +29,8 @@ const findBookByBookIdAndByUserId = async (req, res) => {
 const addBook = async (req, res) => {
     try {
         console.log(req.body);
-        let params = [req.body.id_user, req.body.title, req.body.type, req.body.autor, req.body.price, req.body.photo];
-        let sql = `INSERT INTO book (id_user, title, type, autor, price, photo) 
+        let params = [req.body.id_user, req.body.title, req.body.type, req.body.author, req.body.price, req.body.photo];
+        let sql = `INSERT INTO book (id_user, title, type, author, price, photo) 
                     VALUES (?, ?, ?, ?, ?, ?)`;
         console.log(sql);
 
@@ -48,11 +48,11 @@ const addBook = async (req, res) => {
 
 const editBook = async (req, res) => {
     try {
-        let params = [req.body.id_user, req.body.title, req.body.type, req.body.autor, 
+        let params = [req.body.id_user, req.body.title, req.body.type, req.body.author, 
             req.body.price, req.body.photo, req.body.id_book];
         let sql = `UPDATE book 
                     SET id_user = COALESCE(?, id_user), title = COALESCE(?, title), 
-                    type = COALESCE(?, type), autor = COALESCE(?, autor), 
+                    type = COALESCE(?, type), author = COALESCE(?, author), 
                     price = COALESCE(?, price), photo = COALESCE(?, photo)   
                     WHERE id_book = ?`;
         let [result] = await pool.query(sql, params);
