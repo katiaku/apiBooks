@@ -63,13 +63,25 @@ const editBook = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
+    // try {
+    //     let params = [req.body.id_book];
+    //     let sql = `DELETE FROM book WHERE id_book = ?`;
+    //     let [result] = await pool.query(sql, params);
+    //     res.send(result);
+    //     console.log(result)
+    // } catch (err) {
+    //     console.log(err);
+    // }
+
     try {
-        let params = [req.body.id_book];
+        let id_book = req.query.id_book;
         let sql = `DELETE FROM book WHERE id_book = ?`;
-        let [result] = await pool.query(sql, params);
+        let [result] = await pool.query(sql, [id_book]);
         res.send(result);
+        console.log(result);
     } catch (err) {
-        console.log(err);
+        console.error(err);
+        res.status(500).send('Server error');
     }
 };
 
