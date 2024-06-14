@@ -85,4 +85,20 @@ const deleteBook = async (req, res) => {
     }
 };
 
-module.exports = { findBooksByUserId, findBookByBookIdAndByUserId, addBook, editBook, deleteBook };
+const editBookRating = async (req, res) => {
+    try {
+        // let id_book = req.query.id_book;
+        let params = [req.body.rating, req.body.id_book];
+        let sql = `UPDATE book 
+                    SET rating = COALESCE(?, rating)   
+                    WHERE id_book = ?`;
+        let [result] = await pool.query(sql, params);
+        res.send(result);
+        console.log("edit book", result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+};
+
+module.exports = { findBooksByUserId, findBookByBookIdAndByUserId, addBook, editBook, deleteBook, editBookRating };

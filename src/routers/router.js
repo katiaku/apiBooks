@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const { userRegister, userLogin, editUser } = require('../controllers/user.controller');
-const { findBooksByUserId, findBookByBookIdAndByUserId, addBook, editBook, deleteBook } = require('../controllers/book.controller');
+const { findBooksByUserId, findBookByBookIdAndByUserId, addBook, editBook, deleteBook, editBookRating } = require('../controllers/book.controller');
 
 router.get('/books', findBooksByUserId);
 
@@ -16,6 +16,8 @@ router.post('/books', addBook);
 router.put('/books', editBook);
 
 router.put('/users', editUser);
+
+router.put('/rating', editBookRating);
 
 router.delete('/books', deleteBook);
 
