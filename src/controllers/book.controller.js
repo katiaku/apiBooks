@@ -10,6 +10,7 @@ const findBooksByUserId = async (req, res) => {
         res.send(result);
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server error');
     }
 };
 
@@ -23,13 +24,15 @@ const findBookByBookIdAndByUserId = async (req, res) => {
         res.send(result);
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server error');
     }
 };
 
 const addBook = async (req, res) => {
     try {
         console.log(req.body);
-        let params = [req.body.id_user, req.body.title, req.body.type, req.body.author, req.body.price, req.body.photo];
+        let params = [req.body.id_user, req.body.title, req.body.type, 
+            req.body.author, req.body.price, req.body.photo];
         let sql = `INSERT INTO book (id_user, title, type, author, price, photo) 
                     VALUES (?, ?, ?, ?, ?, ?)`;
         console.log(sql);
@@ -40,9 +43,10 @@ const addBook = async (req, res) => {
         if (result.insertId)
             res.send(String(result.insertId));
         else
-            res.send('Se ha producido un error');
+            res.send('There was an error');
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server error');
     }
 };
 
@@ -59,20 +63,11 @@ const editBook = async (req, res) => {
         res.send(result);
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server error');
     }
 };
 
 const deleteBook = async (req, res) => {
-    // try {
-    //     let params = [req.body.id_book];
-    //     let sql = `DELETE FROM book WHERE id_book = ?`;
-    //     let [result] = await pool.query(sql, params);
-    //     res.send(result);
-    //     console.log(result)
-    // } catch (err) {
-    //     console.log(err);
-    // }
-
     try {
         let id_book = req.query.id_book;
         let sql = `DELETE FROM book WHERE id_book = ?`;
@@ -87,7 +82,6 @@ const deleteBook = async (req, res) => {
 
 const editBookRating = async (req, res) => {
     try {
-        // let id_book = req.query.id_book;
         let params = [req.body.rating, req.body.id_book];
         let sql = `UPDATE book 
                     SET rating = COALESCE(?, rating)   
@@ -101,4 +95,11 @@ const editBookRating = async (req, res) => {
     }
 };
 
-module.exports = { findBooksByUserId, findBookByBookIdAndByUserId, addBook, editBook, deleteBook, editBookRating };
+module.exports = {
+    findBooksByUserId,
+    findBookByBookIdAndByUserId,
+    addBook,
+    editBook,
+    deleteBook,
+    editBookRating
+};

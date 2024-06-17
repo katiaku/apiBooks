@@ -17,7 +17,7 @@ router.put('/books', editBook);
 
 router.put('/users', editUser);
 
-router.put('/rating', editBookRating);
+router.patch('/books', editBookRating);
 
 router.delete('/books', deleteBook);
 

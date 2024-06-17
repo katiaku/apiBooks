@@ -14,9 +14,10 @@ const userRegister = async (req, res) => {
         if (result.insertId)
             res.send(String(result.insertId));
         else
-            res.send('Fallo en el registro de usuario');
+            res.send('Error registering a user');
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server error');
     }
 };
 
@@ -39,10 +40,11 @@ const userLogin = async (req, res) => {
             };
             res.send(userData);
         } else {
-            res.send('Datos introducidos incorrectos');
+            res.send('Input data incorrect');
         }
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server error');
     }
 };
 
@@ -57,7 +59,12 @@ const editUser = async (req, res) => {
         res.send(result);
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server error');
     }
 };
 
-module.exports = { userRegister, userLogin, editUser };
+module.exports = {
+    userRegister,
+    userLogin,
+    editUser
+};
