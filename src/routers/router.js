@@ -1,11 +1,13 @@
 const { Router } = require('express');
 const router = Router();
 const { userRegister, userLogin, editUser } = require('../controllers/user.controller');
-const { findBooksByUserId, findBookByBookIdAndByUserId, addBook, editBook, deleteBook, editBookRating } = require('../controllers/book.controller');
+const { findBooksByUserId, findBookByBookIdAndByUserId, findBooksByRatingAndByUserId, addBook, editBook, deleteBook, editBookRating } = require('../controllers/book.controller');
 
 router.get('/books', findBooksByUserId);
 
 router.get('/book', findBookByBookIdAndByUserId);
+
+router.post('/find', findBooksByRatingAndByUserId);
 
 router.post('/register', userRegister);
 

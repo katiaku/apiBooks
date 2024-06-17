@@ -28,6 +28,20 @@ const findBookByBookIdAndByUserId = async (req, res) => {
     }
 };
 
+const findBooksByRatingAndByUserId = async (req, res) => {
+    try {
+        let params = [req.body.id_user, req.body.rating];
+        console.log(params);
+        let sql;
+        sql = `SELECT * FROM book WHERE id_user = ? AND rating = ?`;
+        let [result] = await pool.query(sql, params);
+        res.send(result);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Server error');
+    }
+};
+
 const addBook = async (req, res) => {
     try {
         console.log(req.body);
@@ -98,6 +112,7 @@ const editBookRating = async (req, res) => {
 module.exports = {
     findBooksByUserId,
     findBookByBookIdAndByUserId,
+    findBooksByRatingAndByUserId,
     addBook,
     editBook,
     deleteBook,
