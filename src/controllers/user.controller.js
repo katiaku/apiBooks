@@ -1,6 +1,6 @@
-const { pool } = require('../db');
+import { pool } from '../db.js';
 
-const userRegister = async (req, res) => {
+export const userRegister = async (req, res) => {
     try {
         console.log(req.body);
         let params = [req.body.firstName, req.body.lastName, req.body.email, req.body.photo, req.body.password];
@@ -21,7 +21,7 @@ const userRegister = async (req, res) => {
     }
 };
 
-const userLogin = async (req, res) => {
+export const userLogin = async (req, res) => {
     try {
         console.log(req.body);
         let params = [req.body.email, req.body.password];
@@ -48,7 +48,7 @@ const userLogin = async (req, res) => {
     }
 };
 
-const editUser = async (req, res) => {
+export const editUser = async (req, res) => {
     try {
         let params = [req.body.firstName, req.body.lastName, req.body.photo, req.body.email];
         let sql = `UPDATE user 
@@ -61,10 +61,4 @@ const editUser = async (req, res) => {
         console.log(err);
         res.status(500).send('Server error');
     }
-};
-
-module.exports = {
-    userRegister,
-    userLogin,
-    editUser
 };

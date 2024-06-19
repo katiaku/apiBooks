@@ -1,6 +1,6 @@
-const { pool } = require('../db');
+import { pool } from '../db.js';
 
-const findBooksByUserId = async (req, res) => {
+export const findBooksByUserId = async (req, res) => {
     try {
         let params = [req.query.id_user];
         console.log(params);
@@ -14,7 +14,7 @@ const findBooksByUserId = async (req, res) => {
     }
 };
 
-const findBookByBookIdAndByUserId = async (req, res) => {
+export const findBookByBookIdAndByUserId = async (req, res) => {
     try {
         let params = [req.query.id_book, req.query.id_user];
         console.log(params);
@@ -28,7 +28,7 @@ const findBookByBookIdAndByUserId = async (req, res) => {
     }
 };
 
-const findBooksByRatingAndByUserId = async (req, res) => {
+export const findBooksByRatingAndByUserId = async (req, res) => {
     try {
         let params = [req.body.id_user, req.body.rating];
         console.log(params);
@@ -42,7 +42,7 @@ const findBooksByRatingAndByUserId = async (req, res) => {
     }
 };
 
-const searchBooksByText = async (req, res) => {
+export const searchBooksByText = async (req, res) => {
     try {
         const { id_user, query } = req.query;
         const sql = `SELECT * FROM book WHERE id_user = ? AND (title LIKE ? OR author LIKE ?)`;
@@ -55,7 +55,7 @@ const searchBooksByText = async (req, res) => {
     }
 };
 
-const addBook = async (req, res) => {
+export const addBook = async (req, res) => {
     try {
         console.log(req.body);
         let params = [req.body.id_user, req.body.title, req.body.type, 
@@ -77,7 +77,7 @@ const addBook = async (req, res) => {
     }
 };
 
-const editBook = async (req, res) => {
+export const editBook = async (req, res) => {
     try {
         let params = [req.body.id_user, req.body.title, req.body.type, req.body.author, 
             req.body.price, req.body.photo, req.body.id_book];
@@ -94,7 +94,7 @@ const editBook = async (req, res) => {
     }
 };
 
-const deleteBook = async (req, res) => {
+export const deleteBook = async (req, res) => {
     try {
         let id_book = req.query.id_book;
         let sql = `DELETE FROM book WHERE id_book = ?`;
@@ -107,7 +107,7 @@ const deleteBook = async (req, res) => {
     }
 };
 
-const editBookRating = async (req, res) => {
+export const editBookRating = async (req, res) => {
     try {
         let params = [req.body.rating, req.body.id_book];
         let sql = `UPDATE book 
@@ -120,15 +120,4 @@ const editBookRating = async (req, res) => {
         console.error(err);
         res.status(500).send('Server error');
     }
-};
-
-module.exports = {
-    findBooksByUserId,
-    findBookByBookIdAndByUserId,
-    findBooksByRatingAndByUserId,
-    searchBooksByText,
-    addBook,
-    editBook,
-    deleteBook,
-    editBookRating
 };

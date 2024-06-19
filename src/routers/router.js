@@ -1,16 +1,7 @@
-const { Router } = require('express');
+import { Router } from 'express';
 const router = Router();
-const { userRegister, userLogin, editUser } = require('../controllers/user.controller');
-const {
-    findBooksByUserId,
-    findBookByBookIdAndByUserId,
-    searchBooksByText,
-    findBooksByRatingAndByUserId,
-    addBook,
-    editBook,
-    deleteBook,
-    editBookRating
-} = require('../controllers/book.controller');
+import { userRegister, userLogin, editUser } from '../controllers/user.controller.js';
+import { findBooksByUserId, findBookByBookIdAndByUserId, searchBooksByText, findBooksByRatingAndByUserId, addBook, editBook, deleteBook, editBookRating } from '../controllers/book.controller.js';
 
 router.get('/books', findBooksByUserId);
 
@@ -34,4 +25,4 @@ router.patch('/books', editBookRating);
 
 router.delete('/books', deleteBook);
 
-module.exports = router;
+export default router;

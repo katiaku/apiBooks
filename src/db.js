@@ -1,6 +1,6 @@
-const mysql = require('mysql2');
+import { createPool } from 'mysql2';
 
-const pool = mysql.createPool({
+export const pool = createPool({
     host: 'localhost',
     user: 'root',
     password: '7g30Icj5',
@@ -13,5 +13,3 @@ const pool = mysql.createPool({
 }).promise();
 
 console.log('Conexión con la BBDD creada');
-
-module.exports = { pool };

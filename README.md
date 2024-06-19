@@ -4,7 +4,7 @@
 Welcome to BookShelve, a comprehensive application designed to enhance your book collection experience. Built with a modern tech stack including React, TypeScript, Tailwind CSS, Framer Motion, MySQL, and Node.js, BookShelve offers a seamless and interactive platform for managing and discovering books.
 
 ## Note
-This is backend part of the BookShelve app. For the frontend go to https://github.com/katiaku/bookstore.
+This is backend part of BookShelve app. For the frontend go to https://github.com/katiaku/bookstore.
 
 ## Features
 #### User Authentication:
