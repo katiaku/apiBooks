@@ -1,15 +1,10 @@
 {
     "version": 2,
+    "name": "apiBooks",
     "builds": [
-        {
-            "src": "src/apiRest.js",
-            "use": "@vercel/node"
-        }
+        { "src": "./index.js", "use": "@vercel/node" }
     ],
     "routes": [
-        {
-            "src": "/routers/(.*)",
-            "dest": "/src/app.js"
-        }
+        { "src": "/(.*)", "dest": "/" }
     ]
 }
