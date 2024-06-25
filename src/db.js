@@ -12,6 +12,6 @@ export const pool = createPool({
     queueLimit: 0
 }).promise();
 
-console.log('Conexión con la BBDD creada');
+console.log('Connected to Database');
 
 
