@@ -3,26 +3,26 @@ const router = Router();
 import { userRegister, userLogin, editUser } from '../controllers/user.controller.js';
 import { findBooksByUserId, findBookByBookIdAndByUserId, searchBooksByText, findBooksByRatingAndByUserId, addBook, editBook, deleteBook, editBookRating } from '../controllers/book.controller.js';
 
-router.get('/books', findBooksByUserId);
+router.get('https://api-bookshelve.vercel.app/books', findBooksByUserId);
 
-router.get('/book', findBookByBookIdAndByUserId);
+router.get('https://api-bookshelve.vercel.app/book', findBookByBookIdAndByUserId);
 
-router.get('/search', searchBooksByText);
+router.get('https://api-bookshelve.vercel.app/search', searchBooksByText);
 
-router.post('/rating', findBooksByRatingAndByUserId);
+router.post('https://api-bookshelve.vercel.app/rating', findBooksByRatingAndByUserId);
 
-router.post('/register', userRegister);
+router.post('https://api-bookshelve.vercel.app/register', userRegister);
 
-router.post('/login', userLogin);
+router.post('https://api-bookshelve.vercel.app/login', userLogin);
 
-router.post('/books', addBook);
+router.post('https://api-bookshelve.vercel.app/books', addBook);
 
-router.put('/books', editBook);
+router.put('https://api-bookshelve.vercel.app/books', editBook);
 
-router.put('/users', editUser);
+router.put('https://api-bookshelve.vercel.app/users', editUser);
 
-router.patch('/books', editBookRating);
+router.patch('https://api-bookshelve.vercel.app/books', editBookRating);
 
-router.delete('/books', deleteBook);
+router.delete('https://api-bookshelve.vercel.app/books', deleteBook);
 
 export default router;
