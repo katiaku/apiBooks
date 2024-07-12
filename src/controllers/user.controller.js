@@ -42,7 +42,7 @@ export const userLogin = async (req, res) => {
         console.log(result);
 
         if (result.length > 0) {
-            const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+            const passwordMatch = await bcrypt.compare(req.body.password, result[0].password);
 
             if (passwordMatch) {
                 const userData = {
