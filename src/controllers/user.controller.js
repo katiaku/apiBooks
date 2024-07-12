@@ -52,16 +52,16 @@ export const userLogin = async (req, res) => {
                     email: result[0].email,
                     photo: result[0].photo
                 };
-                res.json(userData);
+                res.send(userData);
             } else {
-                res.status(401).json({ message: 'Input data incorrect' });
+                res.send('Input data incorrect');
             }
         } else {
-            res.status(401).json({ message: 'Input data incorrect' });
+            res.send('Input data incorrect');
         }
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: 'Server error' });
+        res.send('Server error');
     }
 };
 
