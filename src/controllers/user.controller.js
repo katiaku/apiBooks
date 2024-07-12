@@ -1,4 +1,5 @@
 import { pool } from '../db.js';
+import bcrypt from 'bcrypt';
 
 // @desc   User register
 // @route  POST /register
@@ -6,7 +7,11 @@ import { pool } from '../db.js';
 export const userRegister = async (req, res) => {
     try {
         console.log(req.body);
-        let params = [req.body.firstName, req.body.lastName, req.body.email, req.body.photo, req.body.password];
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+        let params = [req.body.firstName, req.body.lastName, req.body.email, req.body.photo, hashedPassword];
         let sql = `INSERT INTO user (firstName, lastName, email, photo, password) 
                     VALUES (?, ?, ?, ?, ?)`;
         console.log(sql);
@@ -30,21 +35,28 @@ export const userRegister = async (req, res) => {
 export const userLogin = async (req, res) => {
     try {
         console.log(req.body);
-        let params = [req.body.email, req.body.password];
-        let sql = `SELECT * FROM user WHERE email = ? AND password = ?`;
+        let params = [req.body.email];
+        let sql = `SELECT * FROM user WHERE email = ?`;
 
         let [result] = await pool.query(sql, params);
         console.log(result);
 
         if (result.length > 0) {
-            const userData = {
-                id_user: result[0].id_user,
-                firstName: result[0].firstName,
-                lastName: result[0].lastName,
-                email: result[0].email,
-                photo: result[0].photo
-            };
-            res.send(userData);
+            const user = result[0];
+            const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+
+            if (passwordMatch) {
+                const userData = {
+                    id_user: user.id_user,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    photo: user.photo
+                };
+                res.send(userData);
+            } else {
+                res.send('Input data incorrect');
+            }
         } else {
             res.send('Input data incorrect');
         }
