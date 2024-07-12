@@ -1,5 +1,8 @@
 import { pool } from '../db.js';
 
+// @desc   User register
+// @route  POST /register
+// @access Public
 export const userRegister = async (req, res) => {
     try {
         console.log(req.body);
@@ -21,6 +24,9 @@ export const userRegister = async (req, res) => {
     }
 };
 
+// @desc   User login
+// @route  POST /login
+// @access Public
 export const userLogin = async (req, res) => {
     try {
         console.log(req.body);
@@ -48,6 +54,9 @@ export const userLogin = async (req, res) => {
     }
 };
 
+// @desc   Edit user
+// @route  PUT /users
+// @access Public
 export const editUser = async (req, res) => {
     try {
         let params = [req.body.firstName, req.body.lastName, req.body.photo, req.body.email];

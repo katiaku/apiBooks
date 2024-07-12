@@ -1,5 +1,8 @@
 import { pool } from '../db.js';
 
+// @desc   Find book by user id
+// @route  GET /books
+// @access Public
 export const findBooksByUserId = async (req, res) => {
     try {
         let params = [req.query.id_user];
@@ -14,6 +17,9 @@ export const findBooksByUserId = async (req, res) => {
     }
 };
 
+// @desc   Find book by book id and by user id
+// @route  GET /book
+// @access Public
 export const findBookByBookIdAndByUserId = async (req, res) => {
     try {
         let params = [req.query.id_book, req.query.id_user];
@@ -28,6 +34,9 @@ export const findBookByBookIdAndByUserId = async (req, res) => {
     }
 };
 
+// @desc   Find books by rating and by user id
+// @route  POST /rating
+// @access Public
 export const findBooksByRatingAndByUserId = async (req, res) => {
     try {
         let params = [req.body.id_user, req.body.rating];
@@ -42,6 +51,9 @@ export const findBooksByRatingAndByUserId = async (req, res) => {
     }
 };
 
+// @desc   Search books by text
+// @route  GET /search
+// @access Public
 export const searchBooksByText = async (req, res) => {
     try {
         const { id_user, query } = req.query;
@@ -55,6 +67,9 @@ export const searchBooksByText = async (req, res) => {
     }
 };
 
+// @desc   Add book
+// @route  POST /books
+// @access Public
 export const addBook = async (req, res) => {
     try {
         console.log(req.body);
@@ -77,6 +92,9 @@ export const addBook = async (req, res) => {
     }
 };
 
+// @desc   Edit book
+// @route  PUT /books
+// @access Public
 export const editBook = async (req, res) => {
     try {
         let params = [req.body.id_user, req.body.title, req.body.type, req.body.author, 
@@ -94,6 +112,9 @@ export const editBook = async (req, res) => {
     }
 };
 
+// @desc   Delete book
+// @route  DELETE /books
+// @access Public
 export const deleteBook = async (req, res) => {
     try {
         let id_book = req.query.id_book;
@@ -107,6 +128,9 @@ export const deleteBook = async (req, res) => {
     }
 };
 
+// @desc   Edit book rating
+// @route  PATCH /books
+// @access Public
 export const editBookRating = async (req, res) => {
     try {
         let params = [req.body.rating, req.body.id_book];
